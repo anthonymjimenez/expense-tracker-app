@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">"Rastreador de Gastos "</string>
+    <string name="about_our_project">Acerca De Nuestro Proyecto</string>
+    <string name="about_info">Nuestro proyecto se utiliza para administrar tanto los ingresos como los gastos. Hemos implementado funciones de Android como ListView, Buttons, RadioButtons y RadioGroup. También tenemos múltiples actividades que conectamos juntas usando Intent.</string>
+    <string name="created_by">Creado Por Anthony Jiménez Y Stacey Carrillo</string>
+    <string name="current_balance">Saldo Actual:</string>
+    <string name="update_balance">Actualizar Saldo:</string>
+    <string name="total_expense">" Gastos Totales:"</string>
+    <string name="total_income">Ingresos Totales:</string>
+    <string name="about_button">Sobre La Página</string>
+    <string name="history_button">Página de Historia</string>
+    <string name="money_amount">Agregar Cantidad De Dinero</string>
+    <string name="desc">Agregar Descripción</string>
+    <string name="update">" Actualizar"</string>
+    <string name="add">Añadir Artículo</string>
+    <string name="income">Ingresos</string>
+    <string name="expense">Gastos</string>
+    <string name="history">" Página De Historia"</string>
+</resources>

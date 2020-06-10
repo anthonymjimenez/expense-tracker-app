@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     private var balance = 2000.0
     private var isExpense = false
+
     fun onRadioButtonClicked(view: View) {
         if (view is RadioButton) {
             // Is the button now checked?
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     fun sendToAbout(view: View) {
-        val message = "About Our Project"
+        val message = R.string.about_our_project
         val intent =
             Intent(this, AboutActivity::class.java).apply {
             putExtra("EXTRA_M", message)
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun sendToHistory(view: View) {
-        val message = "History"
+        val message = R.string.history
         val intent = Intent(this, HistoryActivity::class.java).apply {
             putExtra("EXTRA_HISTORY", message)
             putStringArrayListExtra("EXTRA_ARRAY", historyView)
@@ -72,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         val totalExpense: TextView = findViewById(R.id.totalExpense)
         val totalIncome: TextView = findViewById(R.id.totalIncome)
 
-        currentBalance.text = "Current Balance: 2000"
+        currentBalance.text = getString(R.string.current_balance) + balance
 
         fun reduceArray(arr: MutableList<Double>): Double {
              return arr.fold( 0.0 , {  acc, next -> acc + next })
@@ -98,16 +99,16 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        fun addToArray(doubleInput: Double, desc: String): Boolean {
+        fun addToArray(doubleInput: Double, desc: String) {
             if(isExpense) {
                 historyView.add(addToHistory(desc, doubleInput, "Income"))
                 expenseArray.add(doubleInput * -1)
-                return expenseView.add(makeDescription(doubleInput, desc))
+                expenseView.add(makeDescription(doubleInput, desc))
             }
-            historyView.add(addToHistory(desc, doubleInput, "Expense"))
-            incomeArray.add(doubleInput)
-            return incomeView.add(makeDescription(doubleInput, desc))
-
+            else {
+                historyView.add(addToHistory(desc, doubleInput, "Expense"))
+                incomeArray.add(doubleInput)
+                incomeView.add(makeDescription(doubleInput, desc)) }
         }
 
         fun determineMoney(numInput: String): Double {
@@ -119,10 +120,10 @@ class MainActivity : AppCompatActivity() {
 
         fun checkTextView(id: String, amount: Double): String {
             if(id === "EXPENSE") {
-                totalExpense.text = "Total Expenses: $amount"
+                totalExpense.text = getString(R.string.total_expense) + amount
                 return "Total Expense $Double"
             }
-            totalIncome.text = "Total Income: $amount"
+            totalIncome.text = getString(R.string.total_income) + amount
             return "Total Income $Double"
         }
         fun determineBalance(id: String, amount: Double): Double {
@@ -131,6 +132,7 @@ class MainActivity : AppCompatActivity() {
             }
             return updateBalance(amount * -1)
         }
+
         fun deleteTransaction(position: Int, numArray: MutableList<Double>, viewArray: MutableList<String>, id: String, adapter: ArrayAdapter<String>) {
             val item: String = viewArray[position]
             val deletedAmount: Double = numArray[position]
@@ -141,38 +143,41 @@ class MainActivity : AppCompatActivity() {
                 amount = reduceArray(numArray)
             }
             checkTextView(id, amount)
-            currentBalance.text = "Current Balance: ${determineBalance(id, deletedAmount)}"
+            currentBalance.text = getString(R.string.current_balance) + determineBalance(id, deletedAmount)
 
             historyView.add(deleteToHistory(item, id))
 
             adapter.notifyDataSetChanged()
-            Toast.makeText(applicationContext, "You deleted : $item", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "You deleted: $item", Toast.LENGTH_SHORT).show()
 
         }
-        fun setNewBalance(newBalance: String): String {
-            balance = newBalance.toDouble()
-            return newBalance
+
+
+        fun setNewBalance(newBalance: String): Double {
+            balance = newBalance.toDouble() + reduceArray(incomeArray) - reduceArray(expenseArray)
+            return balance
         }
         balanceButton.setOnClickListener() {
             val newBalance = userBalance.text.toString()
-            currentBalance.text = "Current Balance: ${setNewBalance(newBalance)}"
+            currentBalance.text = getString(R.string.current_balance) + setNewBalance(newBalance)
         }
+
         submit.setOnClickListener() {
             val description = description.text.toString()
             val money = determineMoney(money.text.toString())
+            addToArray(money, description)
             val incomeAmount = reduceArray(incomeArray)
             val expenseAmount = reduceArray(expenseArray)
 
-            totalExpense.text = "Total Expenses: $expenseAmount"
-            totalIncome.text = "Total Income: $incomeAmount"
-            currentBalance.text = "Current Balance: ${updateBalance(money)}"
-            addToArray(money, description)
-
+            totalExpense.text = getString(R.string.total_expense) + expenseAmount
+            totalIncome.text =  getString(R.string.total_income) + incomeAmount
+            currentBalance.text = getString(R.string.current_balance) + updateBalance(money)
 
 
             expenseAdapter.notifyDataSetChanged()
             incomeAdapter.notifyDataSetChanged()
         }
+
         expenseList.onItemClickListener = OnItemClickListener { parent, view, position, id ->
             deleteTransaction(position, expenseArray, expenseView, "EXPENSE", expenseAdapter)
         }

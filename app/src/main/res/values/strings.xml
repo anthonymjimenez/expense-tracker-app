@@ -1,6 +1,21 @@
 <resources>
     <string name="app_name">expense-tracker</string>
     <string name="about_our_project">About our project</string>
-    <string name="created_by_anthony_jimenez_stacey_carrillo"><![CDATA[Created By Anthony Jimenez & Stacey Carrillo]]></string>
-    <string name="our_project_is_used_to_manage_both_income_and_expenses_we_have_implemented_andrioid_features_such_as_listview_buttons_radiobuttons_and_radiogroup_we_also_have_multiple_activities_that_we_connected_together_using_intent">Our project is used to manage both income and expenses. We have implemented andrioid features such as ListView, Buttons, RadioButtons, and RadioGroup. We also have multiple activities that we connected together using Intent.</string>
+    <string name="created_by">Created By Anthony Jimenez and Stacey Carrillo</string>
+    <string name="about_info">Our project is used to manage both income and expenses. We have implemented android features such as ListView, Buttons, RadioButtons, and RadioGroup. We also have multiple activities that we connected together using Intent.</string>
+    <string name = "current_balance">Current Balance: </string>
+    <string name = "update_balance">Update Balance</string>
+    <string name = "total_expense">Total Expenses: </string>
+    <string name = "total_income">Total Income: </string>
+    <string name = "about_button">About Page</string>
+    <string name = "history_button">History Page</string>
+    <string name = "money_amount">Add money amount</string>
+    <string name = "desc">Add description</string>
+    <string name = "update">Update</string>
+    <string name = "add">Add Item</string>
+    <string name ="income">Income</string>
+    <string name ="expense">Expense</string>
+    <string name="history">History Page</string>
+
+
 </resources>

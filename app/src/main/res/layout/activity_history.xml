@@ -26,7 +26,7 @@
         android:layout_height="40dp"
         android:fontFamily="@font/trade_winds"
         android:gravity="center"
-        android:text="History"
+        android:text="@string/history"
         android:textColor="#7FB3AC"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
